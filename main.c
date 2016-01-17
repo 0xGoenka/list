@@ -6,7 +6,7 @@
 /*   By: eleclet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 12:33:55 by eleclet           #+#    #+#             */
-/*   Updated: 2016/01/16 22:49:38 by eleclet          ###   ########.fr       */
+/*   Updated: 2016/01/17 19:26:03 by eleclet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int		main(void)
 		insert(liste, "fisrt", i);
 		i++;
 	}
-	printf("is 10 found ? %d\n",find(liste , 4));	
+	ptr = find(liste->next, 4);
+	printf("4 = %s\n",ptr->data->s);
+	//printf("is 4 found ? %d\n",find(liste->next , 4));	
 		print(liste->next);
 		del(liste);
-		print(liste->next);
+		//print(liste->next);
 	return (0);
 }

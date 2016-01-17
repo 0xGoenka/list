@@ -6,7 +6,7 @@
 /*   By: eleclet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/13 12:30:47 by eleclet           #+#    #+#             */
-/*   Updated: 2016/01/16 22:22:58 by eleclet          ###   ########.fr       */
+/*   Updated: 2016/01/17 19:54:22 by eleclet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ t_lst	*add(t_lst *liste, char *s, int index)
 	t_lst *tmp;
 
 	tmp = malloc(sizeof(t_lst));
+	tmp->data = malloc(sizeof(t_data));
 	if (tmp)
 	{
-		tmp->s = s;
-		tmp->i = index;
+		tmp->data->s = s;
+		tmp->index = index;
 		tmp->next = liste;
 	}
 	return (tmp);
@@ -30,10 +31,9 @@ t_lst 	*try(t_lst *liste, char *s ,int index)
 {
 return (liste);	
 }
-//t_lst	*circle(t_lst *liste,)
 void	printlist(t_lst *lst)
 {
-	printf("s = %s and i = %d\n", lst->s, lst->i);
+	printf("s = %s and i = %d\n", lst->data->s, lst->index);
 	lst = lst->next;
 }
 void	insert(t_lst *liste, char *s, int index)
@@ -45,8 +45,9 @@ void	insert(t_lst *liste, char *s, int index)
 	liste->next = (t_lst *)malloc(sizeof(t_lst));
 	liste = liste->next;
 	liste->next =NULL;
-	liste->i = index;
-	liste->s = s;
+	liste->index = index;
+	liste->data = (t_data *)malloc(sizeof(t_data));
+	liste->data->s =NULL;
 }
 void	print(t_lst *liste)
 {
@@ -54,15 +55,16 @@ void	print(t_lst *liste)
 	{
 		return;
 	}
-	printf("index = %d\n", liste->i);
+	printf("index = %d\n", liste->index);
 	print(liste->next);
 }
-int		find(t_lst *liste, int i)
+t_lst	*find(t_lst *liste, int i)
 {	
 	while (liste)
-	{
-		if (liste->i == i)
-			return (1);
+	{	
+		printf("liste->i %d\n",liste->index);
+		if (liste->index == i)
+			return (liste);
 		liste = liste->next;
 	}
 	return (0);
@@ -73,8 +75,11 @@ void	del(t_lst *liste)
 	while (liste)
 	{
 		tmp = liste;
+		free(tmp->data);
 		liste = liste->next;
 		free(tmp);
 		tmp = NULL;
 	}
 }
+//void change
+//t_lst	lsthead()
